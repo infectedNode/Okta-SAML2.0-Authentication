@@ -15,9 +15,11 @@ router.get('/', (req, res) => {
   
   // Testing Sesisons
   if(req.session.variableName) {
-    req.session.variableName++;
+    req.session.variableName.visited++;
   } else {
-    req.session.variableName = 1;
+    req.session.variableName = {
+      visited : 1
+    };
   }
   console.log(req.session);
   console.log(req.sessionID);
