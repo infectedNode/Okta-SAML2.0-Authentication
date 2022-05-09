@@ -4,10 +4,12 @@ const express = require('express');
   try{
     const {port} = require('./config');
     const api = require('./api');
+    const errorHandler = require('./error');
     
     const app = express();
 
     app.use('/api', api);
+    app.use(errorHandler);
 
     app.listen(port, () => {
       console.log(`🥳 Server started listening on port : ${port}`);
