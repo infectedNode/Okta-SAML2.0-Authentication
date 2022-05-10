@@ -23,5 +23,12 @@ module.exports = {
       failureFlash: true,
       successRedirect: process.env.FRONTEND_URL
     }
+  },
+  session: {
+    secret: process.env.SECRET,
+    name: process.env.SESSION_NAME,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 1000 * 30 }
   }
 };

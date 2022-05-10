@@ -1,17 +1,11 @@
 const express = require("express");
-const session = require('express-session');
-
 const router = express.Router();
+
+const {session} = require('./middlewares');
 
 require('./../config/passport');
 
-router.use(session({
-  secret: "never-stop-learning",
-  name: "user-session",
-  resave: false,
-  saveUninitialized: true,
-  cookie: { maxAge: 1000 * 30},
-}));
+router.use(session);
 
 router.get('/', (req, res) => {
   
