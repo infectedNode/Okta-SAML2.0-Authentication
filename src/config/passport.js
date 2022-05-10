@@ -3,8 +3,6 @@ const { Strategy } = require('passport-saml');
 
 const config = require('./index');
 
-const savedUsers = [];
-
 passport.use(new Strategy(
   {
     issuer: config.saml.issuer,
@@ -14,10 +12,6 @@ passport.use(new Strategy(
     cert: config.saml.cert
   },
   (user, done) => {
-    if (!savedUsers.includes(user)) {
-      savedUsers.push(user);
-    }
-
     return done(null, user);
   }
 ));

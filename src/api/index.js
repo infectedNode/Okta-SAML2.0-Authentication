@@ -1,9 +1,9 @@
 const express = require('express');
-const router = express.Router();
 const passport = require('passport');
+const router = express.Router();
 
-const { session } = require('./middlewares');
-const { home } = require('./routes');
+const { session, accessHeaders, passportAuth } = require('./middlewares');
+const { home, user } = require('./routes');
 
 require('./../config/passport');
 
@@ -12,20 +12,11 @@ router.use(passport.initialize());
 router.use(passport.session());
 router.use(express.urlencoded({ extended: false }));
 router.use(express.json());
-
-router.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', req.header('origin'));
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  res.header('Access-Control-Allow-Credentials', 'true');
-
-  if (req.method == 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-    return res.status(200).json({});
-  }
-
-  next();
-});
+router.use(accessHeaders);
 
 router.get('/', home);
+router.get('/login', passportAuth);
+router.post('/login/callback', passportAuth);
+router.get('/user', user);
 
 module.exports = router;

@@ -10,23 +10,36 @@ if (process.env.NODE_ENV == 'development') {
   }
 }
 
+const {
+  PORT,
+  CERT,
+  ENTRYPOINT,
+  BACKEND_URL,
+  PATH,
+  PROTOCOL,
+  FAILURE_REDIRECT,
+  FRONTEND_URL,
+  SECRET,
+  SESSION_NAME
+} = process.env;
+
 module.exports = {
-  port: parseInt(process.env.PORT, 10) || 2000,
+  port: parseInt(PORT, 10) || 2000,
   saml: {
-    cert: process.env.CERT,
-    entryPoint: process.env.ENTRYPOINT,
-    issuer: process.env.BACKEND_URL,
-    path: process.env.PATH,
-    protocol: process.env.PROTOCOL,
+    cert: CERT,
+    entryPoint: ENTRYPOINT,
+    issuer: BACKEND_URL,
+    path: PATH,
+    protocol: PROTOCOL,
     options: {
-      failureRedirect: process.env.FAILURE_REDIRECT,
+      failureRedirect: FAILURE_REDIRECT,
       failureFlash: true,
-      successRedirect: process.env.FRONTEND_URL
+      successRedirect: FRONTEND_URL
     }
   },
   session: {
-    secret: process.env.SECRET,
-    name: process.env.SESSION_NAME,
+    secret: SECRET,
+    name: SESSION_NAME,
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 1000 * 30 }

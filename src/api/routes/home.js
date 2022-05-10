@@ -8,10 +8,13 @@ module.exports = (req, res) => {
       visited : 1
     };
   }
-  
+
+  let user = req.isAuthenticated() ? req.user : "user unauthorized";
+
   res.status(200).json({
     msg: "Hello from API server 😵",
     sessionID: req.sessionID,
-    session: req.session
+    session: req.session,
+    user
   });
 };
