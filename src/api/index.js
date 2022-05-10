@@ -3,6 +3,8 @@ const session = require('express-session');
 
 const router = express.Router();
 
+require('./../config/passport');
+
 router.use(session({
   secret: "never-stop-learning",
   name: "user-session",
