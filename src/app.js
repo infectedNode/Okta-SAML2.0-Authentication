@@ -8,7 +8,7 @@ const express = require('express');
     
     const app = express();
 
-    app.use('/api', api);
+    app.use('/', api);
     app.use(errorHandler);
 
     app.listen(port, () => {
